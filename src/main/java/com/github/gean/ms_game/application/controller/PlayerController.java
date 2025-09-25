@@ -2,9 +2,8 @@ package com.github.gean.ms_game.application.controller;
 
 import com.github.gean.ms_game.application.dto.CreatePlayerDto;
 import com.github.gean.ms_game.application.service.PlayerService;
-import com.github.gean.ms_game.domain.Player;
+import com.github.gean.ms_game.domain.entity.Player;
 import jakarta.validation.Valid;
-import jakarta.websocket.server.PathParam;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;

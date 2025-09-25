@@ -1,6 +1,6 @@
 package com.github.gean.ms_game.application.service;
 
-import com.github.gean.ms_game.domain.Player;
+import com.github.gean.ms_game.domain.entity.Player;
 import com.github.gean.ms_game.infrastructure.repository.PlayerRepository;
 import com.github.gean.tictactoe.security.starter.token.TokenService;
 import org.springframework.data.domain.Page;

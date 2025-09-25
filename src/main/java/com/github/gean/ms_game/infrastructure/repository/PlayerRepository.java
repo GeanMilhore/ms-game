@@ -1,6 +1,6 @@
 package com.github.gean.ms_game.infrastructure.repository;
 
-import com.github.gean.ms_game.domain.Player;
+import com.github.gean.ms_game.domain.entity.Player;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

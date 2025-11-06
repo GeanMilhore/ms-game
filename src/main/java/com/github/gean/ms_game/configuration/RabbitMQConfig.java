@@ -1,6 +1,7 @@
 package com.github.gean.ms_game.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.Queue;
@@ -17,7 +18,7 @@ public class RabbitMQConfig {
 
     @Bean
     public DirectExchange directExchange() {
-        return new DirectExchange("create.player");
+        return new DirectExchange("amq.direct");
     }
 
     @Bean
@@ -26,8 +27,8 @@ public class RabbitMQConfig {
     }
 
     @Bean
-    public void bindingExchangePlayer() {
-        BindingBuilder.bind(queue()).to(directExchange()).with("create.player");
+    public Binding bindingExchangePlayer() {
+        return BindingBuilder.bind(queue()).to(directExchange()).with("create.player");
     }
 
     @Bean

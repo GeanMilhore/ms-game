@@ -1,9 +1,6 @@
 package com.github.gean.ms_game.domain.entity;
 
-import com.github.gean.ms_game.domain.enums.Symbol;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -35,8 +32,9 @@ public class Move {
     @Max(2)
     private Integer positionY;
 
-    @Enumerated(EnumType.STRING)
-    private Symbol symbol;
+    @ManyToOne
+    @JoinColumn(name = "game_player_id")
+    private Player player;
 
     @ManyToOne
     @JoinColumn(name = "game_id")

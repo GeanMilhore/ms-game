@@ -1,9 +1,8 @@
 package com.github.gean.ms_game.application.service;
 
-import com.github.gean.ms_game.domain.entity.Player;
+import com.github.gean.ms_game.domain.entity.User;
 import com.github.gean.ms_game.domain.object_values.UserDto;
-import com.github.gean.ms_game.infrastructure.repository.PlayerRepository;
-import com.github.gean.tictactoe.security.starter.token.TokenService;
+import com.github.gean.ms_game.infrastructure.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,21 +15,21 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class PlayerService {
 
-    private final PlayerRepository repository;
+    private final UserRepository repository;
 
     public void createPlayer(UserDto playerDto) {
-        Player playerToBeSaved = new Player();
-        playerToBeSaved.setNickname(playerDto.getName());
+        User userToBeSaved = new User();
+        userToBeSaved.setNickname(playerDto.getName());
         UUID userUUID = UUID.fromString(playerDto.getId());
-        playerToBeSaved.setId(userUUID);
-        repository.save(playerToBeSaved);
+        userToBeSaved.setId(userUUID);
+        repository.save(userToBeSaved);
     }
 
-    public Page<Player> findAll(@RequestParam Pageable pageable) {
+    public Page<User> findAll(@RequestParam Pageable pageable) {
         return repository.findAll(pageable);
     }
 
-    public Page<Player> findByName(String playerName, @RequestParam Pageable pageable) {
+    public Page<User> findByName(String playerName, @RequestParam Pageable pageable) {
         return repository.findByNicknameLike("%" + playerName + "%", pageable);
     }
 }

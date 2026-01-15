@@ -1,8 +1,9 @@
 package com.github.gean.ms_game.application.service;
 
-import com.github.gean.ms_game.domain.Player;
-import com.github.gean.ms_game.infrastructure.repository.PlayerRepository;
-import com.github.gean.tictactoe.security.starter.token.TokenService;
+import com.github.gean.ms_game.domain.entity.User;
+import com.github.gean.ms_game.domain.object_values.UserDto;
+import com.github.gean.ms_game.infrastructure.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -11,29 +12,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class PlayerService {
 
-    private final PlayerRepository repository;
-    private final TokenService tokenService;
+    private final UserRepository repository;
 
-    public PlayerService(PlayerRepository repository, TokenService tokenService) {
-        this.repository = repository;
-        this.tokenService = tokenService;
+    public void createPlayer(UserDto playerDto) {
+        User userToBeSaved = new User();
+        userToBeSaved.setNickname(playerDto.getName());
+        UUID userUUID = UUID.fromString(playerDto.getId());
+        userToBeSaved.setId(userUUID);
+        repository.save(userToBeSaved);
     }
 
-    public void createPlayer(String nickname) {
-        Player playerToBeSaved = new Player();
-        playerToBeSaved.setNickname(nickname);
-        UUID userUUID = UUID.fromString(tokenService.getUserId());
-        playerToBeSaved.setId(userUUID);
-        repository.save(playerToBeSaved);
-    }
-
-    public Page<Player> findAll(@RequestParam Pageable pageable) {
+    public Page<User> findAll(@RequestParam Pageable pageable) {
         return repository.findAll(pageable);
     }
 
-    public Page<Player> findByName(String playerName, @RequestParam Pageable pageable) {
+    public Page<User> findByName(String playerName, @RequestParam Pageable pageable) {
         return repository.findByNicknameLike("%" + playerName + "%", pageable);
     }
 }

@@ -1,4 +1,4 @@
-package com.github.gean.ms_game.domain;
+package com.github.gean.ms_game.domain.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -9,10 +9,10 @@ import lombok.Setter;
 import java.util.UUID;
 
 @Entity
-@Table(name = "tb_player")
+@Table(name = "tb_user")
 @Getter
 @Setter
-public class Player {
+public class User {
 
     @Id
     private UUID id;

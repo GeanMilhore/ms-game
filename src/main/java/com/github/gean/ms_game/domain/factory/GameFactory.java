@@ -1,28 +1,36 @@
-package com.github.gean.ms_game.application.service;
+package com.github.gean.ms_game.domain.factory;
 
 import com.github.gean.ms_game.domain.entity.Game;
 import com.github.gean.ms_game.domain.entity.Player;
 import com.github.gean.ms_game.domain.entity.User;
-import com.github.gean.ms_game.domain.factory.PlayerFactory;
+import com.github.gean.ms_game.domain.exception.GameNotFoundException;
 import com.github.gean.ms_game.domain.object_values.Challenge;
 import com.github.gean.ms_game.infrastructure.repository.GameRepository;
+import com.github.gean.ms_game.infrastructure.repository.PlayerRepository;
 import com.github.gean.ms_game.infrastructure.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.UUID;
 
-@Service
+@Component
 @RequiredArgsConstructor
-public class GameService {
+public class GameFactory {
 
     private final GameRepository gameRepository;
     private final UserRepository userRepository;
+    private final PlayerRepository playerRepository;
+
+    public Game findGameById(UUID id) {
+        return gameRepository.findById(id).orElseThrow(GameNotFoundException::new);
+    }
 
     public Game createGame(Challenge challenge) {
         Game game = new Game();
         List<Player> players = listOfPlayers(challenge);
+        playerRepository.saveAll(players);
+
         game.setPlayers(players);
         return gameRepository.save(game);
     }

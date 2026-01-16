@@ -24,7 +24,7 @@ public class PlayerConsumer {
             throw new AmqpRejectAndDontRequeueException("Invalid user properties");
 
         log.info("User {} received at {}", createdUser.getName(), LocalDateTime.now());
-        service.createPlayer(createdUser);
+        service.createUser(createdUser);
         log.info("Player created for user {}", createdUser.getName());
     }
 }

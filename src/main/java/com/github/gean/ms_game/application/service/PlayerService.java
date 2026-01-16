@@ -17,10 +17,10 @@ public class PlayerService {
 
     private final UserRepository repository;
 
-    public void createPlayer(UserDto playerDto) {
+    public void createUser(UserDto userDto) {
         User userToBeSaved = new User();
-        userToBeSaved.setNickname(playerDto.getName());
-        UUID userUUID = UUID.fromString(playerDto.getId());
+        userToBeSaved.setNickname(userDto.getName());
+        UUID userUUID = UUID.fromString(userDto.getId());
         userToBeSaved.setId(userUUID);
         repository.save(userToBeSaved);
     }
@@ -29,7 +29,7 @@ public class PlayerService {
         return repository.findAll(pageable);
     }
 
-    public Page<User> findByName(String playerName, @RequestParam Pageable pageable) {
-        return repository.findByNicknameLike("%" + playerName + "%", pageable);
+    public Page<User> findByName(String userName, @RequestParam Pageable pageable) {
+        return repository.findByNicknameLike("%" + userName + "%", pageable);
     }
 }

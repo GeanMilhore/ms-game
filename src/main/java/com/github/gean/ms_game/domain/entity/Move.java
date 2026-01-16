@@ -9,11 +9,13 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import lombok.Setter;
 
 import java.util.UUID;
 
 @Entity
 @Table(name = "tb_move")
+@Setter
 public class Move {
 
     @Id

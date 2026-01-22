@@ -19,7 +19,7 @@ import java.util.UUID;
 @Setter
 @Getter
 @Entity
-@Table(name = "tb_game_player")
+@Table(name = "tb_player")
 public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
